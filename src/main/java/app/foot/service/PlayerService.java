@@ -28,4 +28,12 @@ public class PlayerService {
                 .map(mapper::toDomain)
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    public List<Player> updatePlayers(List<Player> toCreate) {
+        return repository.saveAll(toCreate.stream()
+                        .map(mapper::toEntity)
+                        .collect(Collectors.toUnmodifiableList())).stream()
+                .map(mapper::toDomain)
+                .collect(Collectors.toUnmodifiableList());
+    }
 }

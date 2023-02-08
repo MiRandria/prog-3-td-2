@@ -60,6 +60,17 @@ class MatchIntegrationTest {
         //assertTrue(actual.contains(expectedMatch3()));
     }
 
+    @Test
+    void read_matches_ko() throws Exception {
+        MockHttpServletResponse response = mockMvc.perform(get("/matches"))
+                .andExpect(status().isBadRequest())
+                .andReturn()
+                .getResponse();
+        List<Match> actual = convertFromHttpResponse(response);
+
+        assertEquals(3, actual.size());
+        assertTrue(actual.contains(expectedMatch2()));
+    }
     private static Match expectedMatch2() {
         return Match.builder()
                 .id(2)

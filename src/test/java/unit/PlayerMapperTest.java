@@ -2,6 +2,7 @@ package unit;
 
 import app.foot.model.Player;
 import app.foot.model.PlayerScorer;
+import app.foot.model.Team;
 import app.foot.repository.MatchRepository;
 import app.foot.repository.PlayerRepository;
 import app.foot.repository.TeamRepository;
@@ -98,6 +99,21 @@ public class PlayerMapperTest {
                 .minute(10)
                 .ownGoal(false)
                 .match(matchEntity1)
+                .build(), actual);
+    }
+    @Test
+    void player_to_entity_ok() {
+        PlayerEntity actual = subject.toEntity(MATCH_ID, Player.builder()
+                .name("Rakoto")
+                .isGuardian(false)
+                .teamName(teamBarea())
+                .build());
+
+
+        assertEquals(PlayerEntity.builder()
+                .name("Rakoto")
+                .guardian(false)
+                .team(teamBarea())
                 .build(), actual);
     }
 }
