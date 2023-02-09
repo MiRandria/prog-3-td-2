@@ -24,4 +24,5 @@ public class PlayerRestMapper {
                 .teamName(rest.getTeamName())
                 .build();
     }
+
 }

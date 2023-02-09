@@ -56,21 +56,10 @@ class MatchIntegrationTest {
         assertEquals(3, actual.size());
         assertTrue(actual.contains(expectedMatch2()));
         //TODO: add these checks and its values
-        //assertTrue(actual.contains(expectedMatch1()));
-        //assertTrue(actual.contains(expectedMatch3()));
+        assertTrue(actual.contains(expectedMatch1()));
+        assertTrue(actual.contains(expectedMatch3()));
     }
 
-    @Test
-    void read_matches_ko() throws Exception {
-        MockHttpServletResponse response = mockMvc.perform(get("/matches"))
-                .andExpect(status().isBadRequest())
-                .andReturn()
-                .getResponse();
-        List<Match> actual = convertFromHttpResponse(response);
-
-        assertEquals(3, actual.size());
-        assertTrue(actual.contains(expectedMatch2()));
-    }
     private static Match expectedMatch2() {
         return Match.builder()
                 .id(2)
@@ -80,7 +69,24 @@ class MatchIntegrationTest {
                 .datetime(Instant.parse("2023-01-01T14:00:00Z"))
                 .build();
     }
-
+    private static Match expectedMatch1() {
+        return Match.builder()
+                .id(1)
+                .teamA(teamMatchA())
+                .teamB(teamMatchB())
+                .stadium("S2")
+                .datetime(Instant.parse("2023-01-01T14:00:00Z"))
+                .build();
+    }
+    private static Match expectedMatch3() {
+        return Match.builder()
+                .id(3)
+                .teamA(teamMatchA())
+                .teamB(teamMatchB())
+                .stadium("S2")
+                .datetime(Instant.parse("2023-01-01T14:00:00Z"))
+                .build();
+    }
     private static TeamMatch teamMatchB() {
         return TeamMatch.builder()
                 .team(team3())
